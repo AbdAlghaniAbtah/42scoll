@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "loading-programs"
+version = "0.1.0"
+description = "Matrix data analysis and dependency management exercise"
+authors = ["Abd Alghani Mohammad <abdalghani.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = ">=2.1.0"
+numpy = ">=1.25.0"
+matplotlib = ">=3.7.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
