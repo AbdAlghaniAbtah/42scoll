@@ -7,7 +7,6 @@ except ImportError:
     print("Pydantic library is not installed. Please install it using 'pip install pydantic' and try again.")
     sys.exit(1)
 class SpaceStation(BaseModel):
-    
     station_id: str = Field(..., min_length=3, max_length=10)
     name: str = Field(..., min_length=1, max_length=50)
     crew_size: int = Field(..., ge=1, le=20)
@@ -16,6 +15,8 @@ class SpaceStation(BaseModel):
     last_maintenance: datetime
     is_operational: bool = True
     notes: str| None = Field(None, max_length=200)
+    model_config = {'validate_assignment': True}
+
 
 def main() -> None:
     print("Space Station Data Validation")
