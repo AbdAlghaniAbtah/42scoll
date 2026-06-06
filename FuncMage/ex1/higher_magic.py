@@ -22,14 +22,32 @@ def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
     return amplify
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
-    pass
+    def throw(target: str, power: int) -> str:
+        if condition(target, power):
+            return spell(target, power)
+        else:
+            return "Spell fizzled"
+    return throw
 
 def spell_sequence(spells: list[Callable]) -> Callable:
-    pass
+    def sequence(target: str, power: int) -> list[str]:
+        lis: list[str] = []
+        for spell in spells:
+            lis.append(spell(target, power))
+        return lis
+    return sequence
 
 def main():
+    print("Testing spell combiner...")
+    combined = spell_combiner(fireball, heal) 
+    output = combined("Dragon", 20)
+    print(f"Combined spell result: {output[0]}, {output[1]}")
 
-    mega_fireball = power_amplifier(fireball, 3)
-    print(mega_fireball("Goblin", 50))
+    print("\n")
+
+    print("Testing power amplifier...")
+    amplified = power_amplifier(fireball, 3)
+    print(f"Original: 10, Amplified: {amplified('Dragon', 10)}")
+
 if __name__ == "__main__":
     main()
